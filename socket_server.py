@@ -75,7 +75,7 @@ def signal_handler(signal, frame):
 def server_program():
     signal.signal(signal.SIGINT, signal_handler)
     host = socket.gethostname ()
-    port = 5003
+    port = 5002
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind ( (host, port) )

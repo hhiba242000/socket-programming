@@ -2,22 +2,26 @@ import socket
 import os
 import signal
 import sys
+import logging
 
+logging.info('hello')
 infinite_loop = True
-socket client_socket = None
+
 def sig_exit(signal,frame):
     print('\nYou pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!')
-    client_socket.close()
+    sys.exit(0)
+    #client_socket.close()
 
 def sig_alarm(signal,frame):
     print("\nClient is busy at the moment, get back to it in another request")
+    #client_socket.close()
     sys.exit(0)
 
 def client_program():
     signal.signal(signal.SIGINT, sig_exit)
     signal.signal(signal.SIGALRM,sig_alarm)
     host = socket.gethostname()
-    port = 5003
+    port = 5002
 
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((host, port))
@@ -45,7 +49,22 @@ def client_program():
 
 
 if __name__ == '__main__':
-    client_program()
+    logging.basicConfig(filename="newfile.log",
+                        format='%(asctime)s %(message)s',
+                        filemode='w')
 
-import socket
+    # Creating an object
+    logger = logging.getLogger()
+
+    # Setting the threshold of logger to DEBUG
+    logger.setLevel(logging.DEBUG)
+
+    # Test messages
+    logger.debug("Harmless debug Message")
+    logger.info("Just an information")
+    logger.warning("Its a Warning")
+    logger.error("Did you try to divide by zero")
+    logger.critical("Internet is down")
+    # client_program()
+
 
