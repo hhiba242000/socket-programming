@@ -1,4 +1,5 @@
 import socket
+import os
 
 
 def print_hi(name):
@@ -68,27 +69,34 @@ def postfixEvaluator(expression):
 
 def server_program():
     host = socket.gethostname ()
-    port = 5008
+    port = 5005
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind ( (host, port) )
-    server_socket.listen (0)
     while True:
-        conn, address = server_socket.accept()
-        with conn:
-            print("Connection from: " + str(address))
-            while True:
-                data = conn.recv(1024).decode()
-                if str(data) == "bye":
-                    break
-                print("from connected user: " + str(data))
-                inp = str(data)
-                out = infixToPostfix(inp)
-                res = postfixEvaluator(out)
-                print("result sent to user:" + str(res))
-
-                data = (str(res)).encode()
-                conn.send(data)
+        server_socket.listen(0)
+        
+        while True:
+            conn, address = server_socket.accept()
+            with conn:
+                pid = os.fork()
+                if pid == 0:
+                    print("Connection from: " + str(address))
+                    while True:
+                        data = conn.recv(1024).decode()
+                        if str(data) == "bye":
+                            break
+                        print(str(address))
+                        print("from connected user: " + str(data))
+                        inp = str(data)
+                        out = infixToPostfix(inp)
+                        res = postfixEvaluator(out)
+                        print("result sent to user:" + str(res))
+                        data = (str(res)).encode()
+                        conn.send(data)
+                    
+        
+        
 
 
 if __name__ == '__main__':
