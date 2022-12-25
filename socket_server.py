@@ -2,6 +2,8 @@ import socket
 import os
 import signal
 import sys
+import math
+
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -13,8 +15,6 @@ Priority = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}  # dictionary having priorit
 
 
 def infixToPostfix(expression):
-    if expression=='':
-        return ''
     stack = []  # initialization of empty stack
 
     output = ''
@@ -50,8 +50,6 @@ def infixToPostfix(expression):
     return output
 
 def postfixEvaluator(expression):
-    if expression=='':
-        return''
     stack = [] # initialization of empty stack
     numberTemp1=''
     for character in expression:
@@ -83,7 +81,7 @@ def signal_handler(signal, frame):
 def server_program():
     signal.signal(signal.SIGINT, signal_handler)
     host = socket.gethostname ()
-    port = 5005
+    port = 5004
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind ( (host, port) )
@@ -102,6 +100,20 @@ def server_program():
                             conn.send(data.encode())
                             break
                         inp = str(data)
+                        if inp.__contains__ ( "sin" ):
+                            inp = inp.replace ( "sin(", str ( math.sin ( float ( inp[4:inp.index(")")] ) ) ) )
+                            tmp = inp[:inp.index(".")+1]
+                            inp = inp[inp.index("."):].replace(".", "")
+                            inp = inp.replace ( ")", "" )
+                            inp = tmp + inp
+                            
+                        elif inp.__contains__ ( "exp" ):
+                            inp = inp.replace ( "exp(", str ( math.exp ( float ( inp[4:inp.index(")")] ) ) ) )
+                            tmp = inp[:inp.index(".")+1]
+                            inp = inp[inp.index("."):].replace(".", "")
+                            inp = inp.replace ( ")", "" )
+                            inp = tmp + inp
+                        
                         out = infixToPostfix(inp)
                         res = postfixEvaluator(out)
                         print("result sent to user:" + str(res))

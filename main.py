@@ -2,7 +2,7 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
+import math
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -61,8 +61,6 @@ def postfixEvaluator(expression):
             numberTemp1=''
             continue
         else:
-            # stack.append(float(numberTemp1))
-            # numberTemp1=''
             temp1 = stack.pop()
             temp2 = stack.pop()
             if character == '+':
@@ -80,6 +78,19 @@ def postfixEvaluator(expression):
 if __name__ == '__main__':
     while True:
         inp = input("Enter input: ")
+        if inp.__contains__ ( "sin" ):
+            inp = inp.replace ( "sin(", str ( math.sin ( float ( inp[4:inp.index(")")] ) ) ) )
+            tmp = inp[:inp.index(".")+1]
+            inp = inp[inp.index("."):].replace(".", "")
+            inp = inp.replace ( ")", "" )
+            inp = tmp + inp
+            
+        elif inp.__contains__ ( "exp" ):
+            inp = inp.replace ( "exp(", str ( math.exp ( float ( inp[4:inp.index(")")] ) ) ) )
+            tmp = inp[:inp.index(".")+1]
+            inp = inp[inp.index("."):].replace(".", "")
+            inp = inp.replace ( ")", "" )
+            inp = tmp + inp
         print(inp)
         out=infixToPostfix(inp)
         print(out)
