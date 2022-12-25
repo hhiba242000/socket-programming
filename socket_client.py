@@ -3,7 +3,7 @@ import socket
 
 def client_program():
     host = socket.gethostname()
-    port = 5005
+    port = 5004
 
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((host, port))
