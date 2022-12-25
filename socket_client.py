@@ -3,20 +3,24 @@ import socket
 
 def client_program():
     host = socket.gethostname()
-    port = 5005
+    port = 5005 #take it as argument from command line
 
-    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #SOCK_STREAM for TCP sockets and SOCK_DGRAM for UDP sockets
     client_socket.connect((host, port))
 
     while True:
         message = input(" -> ")
-        client_socket.send(message.encode())  # send message
-        if message == "bye":
+        client_socket.sendall(message.encode())  # send message
+
+        data = client_socket.recv(1024).decode() # receive response
+        if data == "bye":
+            print("Client is notified you left")
             break
-        data = client_socket.recv(1024).decode()  # receive response
 
+        if  not data :
+            print("Server is dead")
+            break
         print('Received from server: ' + data)  # show in terminal
-
 
     client_socket.close()  # close the connection
 

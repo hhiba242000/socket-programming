@@ -1,12 +1,13 @@
 import socket
 import os
-
+import signal
+import sys
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print ( f'Hi, {name}' )  # Press Ctrl+F8 to toggle the breakpoint.
 
-
+Clients_List =
 Operators = set ( [ '+', '-', '*', '/', '(', ')', '^' ] )  # collection of Operators
 
 Priority = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}  # dictionary having priorities of Operators
@@ -66,16 +67,19 @@ def postfixEvaluator(expression):
                 stack.append ( int ( temp2 ) / int ( temp1 ) )
     return stack.pop ()
 
+def signal_handler(signal, frame):
+    print('\nYou pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!')
+    sys.exit(0)
 
 def server_program():
+    signal.signal(signal.SIGINT, signal_handler)
     host = socket.gethostname ()
     port = 5005
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind ( (host, port) )
     while True:
-        server_socket.listen(0)
-        
+        server_socket.listen()
         while True:
             conn, address = server_socket.accept()
             with conn:
@@ -85,16 +89,16 @@ def server_program():
                     while True:
                         data = conn.recv(1024).decode()
                         if str(data) == "bye":
+                            data = "bye"
+                            conn.send(data.encode())
                             break
-                        print(str(address))
-                        print("from connected user: " + str(data))
                         inp = str(data)
                         out = infixToPostfix(inp)
                         res = postfixEvaluator(out)
                         print("result sent to user:" + str(res))
                         data = (str(res)).encode()
                         conn.send(data)
-                    
+
         
         
 
