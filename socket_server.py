@@ -13,7 +13,9 @@ Priority = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}  # dictionary having priorit
 
 
 def infixToPostfix(expression):
-    stack = [ ]  # initialization of empty stack
+    if expression=='':
+        return ''
+    stack = []  # initialization of empty stack
 
     output = ''
 
@@ -25,47 +27,53 @@ def infixToPostfix(expression):
             output += character
 
         elif character == '(':  # else Operators push onto stack
-
-            stack.append ( '(' )
+            output+=' '
+            stack.append('(')
 
         elif character == ')':
+            output+=' '
+            while stack and stack[-1] != '(':
+                output += stack.pop()
 
-            while stack and stack [ -1 ] != '(':
-                output += stack.pop ()
-
-            stack.pop ()
+            stack.pop()
 
         else:
+            output+=' '
+            while stack and stack[-1] != '(' and Priority[character] <= Priority[stack[-1]]:
+                output += stack.pop()
 
-            while stack and stack [ -1 ] != '(' and Priority [ character ] <= Priority [ stack [ -1 ] ]:
-                output += stack.pop ()
-
-            stack.append ( character )
-
+            stack.append(character)
+    output+=' '
     while stack:
-        output += stack.pop ()
+        output += stack.pop()
 
     return output
 
-
 def postfixEvaluator(expression):
-    stack = [ ]  # initialization of empty stack
+    if expression=='':
+        return''
+    stack = [] # initialization of empty stack
+    numberTemp1=''
     for character in expression:
-        if character not in Operators:
-            stack.append ( character )
+        if character not in Operators and character != ' ':
+            numberTemp1+=character
+            continue
+        elif character==' ':
+            stack.append(float(numberTemp1))
+            numberTemp1=''
+            continue
         else:
-            temp1 = stack.pop ()
-            temp2 = stack.pop ()
+            temp1 = stack.pop()
+            temp2 = stack.pop()
             if character == '+':
-                stack.append ( int ( temp2 ) + int ( temp1 ) )
+                stack.append(float(temp2)+float(temp1))
             elif character == '-':
-                stack.append ( int ( temp2 ) - int ( temp1 ) )
+                stack.append(float(temp2)-float(temp1))
             elif character == '*':
-                stack.append ( int ( temp2 ) * int ( temp1 ) )
+                stack.append(float(temp2)*float(temp1))
             elif character == '/':
-                stack.append ( int ( temp2 ) / int ( temp1 ) )
-    return stack.pop ()
-
+                stack.append(float(temp2)/float(temp1))
+    return stack.pop()
 
 def server_program():
     host = socket.gethostname ()
@@ -84,7 +92,7 @@ def server_program():
                     print("Connection from: " + str(address))
                     while True:
                         data = conn.recv(1024).decode()
-                        if str(data) == "bye":
+                        if str(data) == "bye" or str(data) == '':
                             break
                         print(str(address))
                         print("from connected user: " + str(data))
