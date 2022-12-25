@@ -1,5 +1,7 @@
 import socket
-
+import os
+import signal
+import sys
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -66,9 +68,14 @@ def postfixEvaluator(expression):
     return stack.pop ()
 
 
+def signal_handler(signal, frame):
+    print('\nYou pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!')
+    sys.exit(0)
+
 def server_program():
+    signal.signal(signal.SIGINT, signal_handler)
     host = socket.gethostname ()
-    port = 5008
+    port = 5003
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind ( (host, port) )
