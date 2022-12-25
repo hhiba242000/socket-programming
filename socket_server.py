@@ -2,6 +2,16 @@ import socket
 import os
 import signal
 import sys
+import logging
+
+logging.basicConfig(filename="./serverfile.log",
+                    format='%(asctime)s %(message)s',
+                    filemode='a', force=True)
+
+# Creating an object
+logger = logging.getLogger()
+# Setting the threshold of logger to DEBUG
+logger.setLevel(logging.DEBUG)
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -69,7 +79,7 @@ def postfixEvaluator(expression):
 
 
 def signal_handler(signal, frame):
-    print('\nYou pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!')
+    logger.info('\nYou pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!')
     sys.exit(0)
 
 def server_program():
@@ -83,16 +93,16 @@ def server_program():
     while True:
         conn, address = server_socket.accept()
         with conn:
-            print("Connection from: " + str(address))
+            logger.info("Connection from: " + str(address))
             while True:
                 data = conn.recv(1024).decode()
                 if str(data) == "bye":
                     break
-                print("from connected user: " + str(data))
+                logger.info("from connected user: " + str(data))
                 inp = str(data)
                 out = infixToPostfix(inp)
                 res = postfixEvaluator(out)
-                print("result sent to user:" + str(res))
+                logger.info("result sent to user:" + str(res))
 
                 data = (str(res)).encode()
                 conn.send(data)
