@@ -106,9 +106,17 @@ def server_program():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
-    host = '127.0.0.1'
-    port = 5005
+    if len(sys.argv) == 3:
+        for i in sys.argv:
+            print(str(i))
+        host = str(sys.argv[1])
+        port = int(sys.argv[2])
+    else:
+        host = '127.0.0.1'
+        port = 5005
 
+    print(host)
+    print(port)
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind ( (host, port) )
     while True:

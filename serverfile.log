@@ -1,2 +1,9 @@
-2022-12-26 17:50:39,499 Connection from: ('127.0.0.1', 43304)
-2022-12-26 17:54:28,535 Connection from: ('127.0.0.1', 43308)
+2022-12-26 18:15:15,948 Connection from: ('127.0.0.1', 43528)
+2022-12-26 18:15:20,261 data decoded: 1+5
+2022-12-26 18:15:20,261 result sent to user:6.0
+2022-12-26 18:15:27,122 data decoded: 
+2022-12-26 18:15:27,122 Client exited by keyboard interrupt
+2022-12-26 18:15:35,764 
+You pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!
+2022-12-26 18:15:35,764 
+You pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!

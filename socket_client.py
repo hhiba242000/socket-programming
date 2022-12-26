@@ -17,12 +17,19 @@ def client_program():
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
 
-    port = int(sys.argv[1])
-    host = '127.0.0.1' #take it as argument from command line
+    if len(sys.argv) == 3:
+        for i in sys.argv:
+            print(str(i))
+        host = str(sys.argv[1])
+        port = int(sys.argv[2])
+    else:
+        host = '127.0.0.1'
+        port = 5005
 
-    print(host +" "+str(port))
+    print(host)
+    print(port)
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #SOCK_STREAM for TCP sockets and SOCK_DGRAM for UDP sockets
-    client_socket.connect((host, 5005))
+    client_socket.connect((host, port))
 
     while True:
         message = input(" -> ")
