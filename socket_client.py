@@ -26,8 +26,10 @@ infinite_loop = True
 
 def sig_exit(signal,frame):
     logger.info('\nYou pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!')
-    message = ""
-    client_socket.send(message.encode())
+    message = "bye"
+    client_socket.send(str(message).encode())
+    
+    client_socket.close()
     sys.exit(0)
     #client_socket.close()
 

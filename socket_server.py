@@ -90,8 +90,10 @@ def signal_handler(signal, frame):
     sys.exit(0)
 
 def server_program():
+    global current
     current=0
-    signal.signal(signal.SIGINT, signal_handler)  
+    signal.signal(signal.SIGINT, signal_handler) 
+    flag=0 
     while True:
         server_socket.listen ()
         while True:
@@ -102,12 +104,16 @@ def server_program():
                 if (current==0):
                     current=1
                     pid = os.fork()
-                    if pid ==0 :
+                    if pid !=0 :
+                        # os.
+                        # os.kill(int(os.getppid()), signal.SIGKILL)
                         logger.info("Connection from: " + str(address))
                         while True:
                             data = conn.recv(1024).decode()
-                            if str(data) == "bye" or str(data)=="":
+                            if str(data) == "bye" or str(data)=="exit":
                                 current=0
+                                flag=1
+                                server_socket.listen()
                                 
                                 break
                             logger.info("from connected user: " + str(data))
@@ -118,6 +124,13 @@ def server_program():
 
                             data = (str(res)).encode()
                             conn.send(data)
+                        if flag ==1:
+                            current=0
+                            conn.close
+                            os.kill(pid,signal.SIGKILL)
+                            break
+                    # else:
+                    #     os.kill(0,signal.SIGKILL)
                 else:
                 # connE, addressE = server_socket.accept()
                 # with connE:
@@ -125,6 +138,7 @@ def server_program():
                     conn.send(message.encode())
                     conn.close()
                     break
+            # os.kill(pid,signal.SIGTERM)
             
             
     
