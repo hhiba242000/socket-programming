@@ -1,8 +1,9 @@
 import socket
 import json
+import os
 
 def client_program():
-
+    os.environ['NO_PROXY'] = '127.0.0.1'
     host = socket.gethostname()
     port = 5003 #take it as argument from command line
 
