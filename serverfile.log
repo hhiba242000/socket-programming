@@ -410,3 +410,209 @@ You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
 2022-12-26 18:20:13,788 result sent to user:2
 2022-12-26 18:23:37,995 
 You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:33:38,775 Connection from: ('127.0.0.1', 35774)
+2022-12-26 18:33:41,907 from connected user: 5
+2022-12-26 18:33:41,908 result sent to user:5
+2022-12-26 18:33:47,887 Connection from: ('127.0.0.1', 33530)
+2022-12-26 18:33:47,888 from connected user: 2
+2022-12-26 18:33:47,888 result sent to user:2
+2022-12-26 18:37:14,092 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:42:20,299 Connection from: ('127.0.0.1', 34006)
+2022-12-26 18:42:21,686 from connected user: 5
+2022-12-26 18:42:21,686 result sent to user:5
+2022-12-26 18:46:17,175 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:46:17,175 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:46:23,144 Connection from: ('127.0.0.1', 50488)
+2022-12-26 18:46:24,601 from connected user: 5
+2022-12-26 18:46:24,602 result sent to user:5
+2022-12-26 18:47:48,791 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:47:48,796 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:49:15,937 Connection from: ('127.0.0.1', 58764)
+2022-12-26 18:49:16,945 from connected user: 5
+2022-12-26 18:49:16,945 result sent to user:5
+2022-12-26 18:53:15,785 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:53:15,785 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:53:20,431 Connection from: ('127.0.0.1', 40656)
+2022-12-26 18:53:21,151 from connected user: 3
+2022-12-26 18:53:21,151 result sent to user:3
+2022-12-26 18:54:31,538 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:54:31,543 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:54:34,170 Connection from: ('127.0.0.1', 43064)
+2022-12-26 18:54:35,158 from connected user: 5
+2022-12-26 18:54:35,158 result sent to user:5
+2022-12-26 18:56:40,878 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:56:40,878 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:56:46,201 Connection from: ('127.0.0.1', 47304)
+2022-12-26 18:56:47,062 from connected user: 5
+2022-12-26 18:56:47,062 result sent to user:5
+2022-12-26 18:57:25,542 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 18:57:25,542 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:23:35,085 Connection from: ('127.0.0.1', 57172)
+2022-12-26 19:23:36,025 from connected user: 4
+2022-12-26 19:23:36,025 result sent to user:4
+2022-12-26 19:23:48,420 Connection from: ('127.0.0.1', 57174)
+2022-12-26 19:23:48,421 from connected user: 5
+2022-12-26 19:23:48,421 result sent to user:5
+2022-12-26 19:23:52,838 Connection from: ('127.0.0.1', 36310)
+2022-12-26 19:23:53,485 from connected user: 4
+2022-12-26 19:23:53,485 result sent to user:4
+2022-12-26 19:23:54,179 from connected user: 6
+2022-12-26 19:23:54,179 result sent to user:6
+2022-12-26 19:23:54,711 from connected user: 5
+2022-12-26 19:23:54,711 result sent to user:5
+2022-12-26 19:28:29,369 Connection from: ('127.0.0.1', 36324)
+2022-12-26 19:28:29,370 from connected user: 5
+2022-12-26 19:28:29,370 result sent to user:5
+2022-12-26 19:28:30,993 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:28:34,129 Connection from: ('127.0.0.1', 54018)
+2022-12-26 19:28:35,378 from connected user: 5
+2022-12-26 19:28:35,378 result sent to user:5
+2022-12-26 19:28:44,371 Connection from: ('127.0.0.1', 54032)
+2022-12-26 19:28:44,371 from connected user: 5
+2022-12-26 19:28:44,371 result sent to user:5
+2022-12-26 19:30:05,278 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:30:09,531 Connection from: ('127.0.0.1', 55848)
+2022-12-26 19:30:10,465 from connected user: 5
+2022-12-26 19:30:10,465 result sent to user:5
+2022-12-26 19:30:18,880 Connection from: ('127.0.0.1', 44804)
+2022-12-26 19:30:18,880 from connected user: 5
+2022-12-26 19:30:18,880 result sent to user:5
+2022-12-26 19:30:25,557 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:32:05,629 Connection from: ('127.0.0.1', 43548)
+2022-12-26 19:32:08,350 from connected user: 5
+2022-12-26 19:32:08,350 result sent to user:5
+2022-12-26 19:32:14,955 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:32:29,109 Connection from: ('127.0.0.1', 37068)
+2022-12-26 19:36:38,253 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:36:49,540 Connection from: ('127.0.0.1', 54082)
+2022-12-26 19:36:50,504 from connected user: 5
+2022-12-26 19:36:50,504 result sent to user:5
+2022-12-26 19:37:12,426 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:43:20,106 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:44:44,850 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:45:35,174 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:46:13,823 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:49:38,803 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:51:42,880 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:51:46,081 Connection from: ('127.0.0.1', 49544)
+2022-12-26 19:51:48,757 from connected user: 5
+2022-12-26 19:51:48,757 result sent to user:5
+2022-12-26 19:51:49,486 from connected user: 4
+2022-12-26 19:51:49,486 result sent to user:4
+2022-12-26 19:52:02,285 Connection from: ('127.0.0.1', 49550)
+2022-12-26 19:52:02,286 from connected user: 3
+2022-12-26 19:52:02,286 result sent to user:3
+2022-12-26 19:52:21,654 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:52:38,702 Connection from: ('127.0.0.1', 39882)
+2022-12-26 19:52:39,898 from connected user: 5
+2022-12-26 19:52:39,898 result sent to user:5
+2022-12-26 19:54:07,991 Connection from: ('127.0.0.1', 46972)
+2022-12-26 19:54:07,992 from connected user: 2
+2022-12-26 19:54:07,992 result sent to user:2
+2022-12-26 19:54:09,138 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:54:27,503 Connection from: ('127.0.0.1', 59306)
+2022-12-26 19:54:28,522 from connected user: 4
+2022-12-26 19:54:28,522 result sent to user:4
+2022-12-26 19:55:17,068 Connection from: ('127.0.0.1', 59310)
+2022-12-26 19:55:17,068 from connected user: 2
+2022-12-26 19:55:17,068 result sent to user:2
+2022-12-26 19:55:18,548 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:55:22,166 Connection from: ('127.0.0.1', 52040)
+2022-12-26 19:55:22,842 from connected user: 5
+2022-12-26 19:55:22,842 result sent to user:5
+2022-12-26 19:57:08,084 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 19:57:18,974 Connection from: ('127.0.0.1', 57930)
+2022-12-26 19:57:27,333 from connected user: 5
+2022-12-26 19:57:27,333 result sent to user:5
+2022-12-26 20:00:30,561 Connection from: ('127.0.0.1', 37756)
+2022-12-26 20:00:30,561 from connected user: 3
+2022-12-26 20:00:30,561 result sent to user:3
+2022-12-26 20:00:31,481 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:00:48,210 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:01:27,389 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:01:38,359 Connection from: ('127.0.0.1', 37916)
+2022-12-26 20:01:49,848 from connected user: 5
+2022-12-26 20:01:49,848 result sent to user:5
+2022-12-26 20:07:32,630 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:07:50,143 Connection from: ('127.0.0.1', 36400)
+2022-12-26 20:07:52,428 from connected user: 1
+2022-12-26 20:07:52,429 result sent to user:1
+2022-12-26 20:07:53,937 from connected user: 1
+2022-12-26 20:07:53,938 result sent to user:1
+2022-12-26 20:08:15,192 Connection from: ('127.0.0.1', 36856)
+2022-12-26 20:08:15,192 from connected user: 2
+2022-12-26 20:08:15,192 result sent to user:2
+2022-12-26 20:14:36,625 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:15:23,627 Connection from: ('127.0.0.1', 42358)
+2022-12-26 20:15:24,833 from connected user: 5
+2022-12-26 20:15:24,833 result sent to user:5
+2022-12-26 20:15:31,705 Connection from: ('127.0.0.1', 42366)
+2022-12-26 20:15:31,705 from connected user: 5
+2022-12-26 20:15:31,705 result sent to user:5
+2022-12-26 20:15:32,578 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:16:36,945 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:17:59,135 Connection from: ('127.0.0.1', 48808)
+2022-12-26 20:18:00,689 from connected user: 3
+2022-12-26 20:18:00,690 result sent to user:3
+2022-12-26 20:19:09,486 Connection from: ('127.0.0.1', 36600)
+2022-12-26 20:19:09,486 from connected user: 2
+2022-12-26 20:19:09,486 result sent to user:2
+2022-12-26 20:19:11,868 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:19:18,220 Connection from: ('127.0.0.1', 42890)
+2022-12-26 20:19:19,579 from connected user: 2
+2022-12-26 20:19:19,579 result sent to user:2
+2022-12-26 20:19:42,022 Connection from: ('127.0.0.1', 59474)
+2022-12-26 20:19:42,993 from connected user: 5
+2022-12-26 20:19:42,993 result sent to user:5
+2022-12-26 20:20:09,650 from connected user: 4
+2022-12-26 20:20:09,650 result sent to user:4
+2022-12-26 20:20:28,249 Connection from: ('127.0.0.1', 46606)
+2022-12-26 20:20:28,826 from connected user: 2
+2022-12-26 20:20:28,828 result sent to user:2
+2022-12-26 20:20:38,457 from connected user: 2
+2022-12-26 20:20:38,458 result sent to user:2
+2022-12-26 20:20:50,096 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:20:50,096 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:20:50,096 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-26 20:20:50,104 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!

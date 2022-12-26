@@ -96,31 +96,36 @@ def server_program():
         server_socket.listen ()
         while True:
             conn, address = server_socket.accept()
+            
+            
             with conn:
                 if (current==0):
                     current=1
-                    logger.info("Connection from: " + str(address))
-                    while True:
-                        data = conn.recv(1024).decode()
-                        if str(data) == "bye" or str(data)=="":
-                            current=0
-                            break
-                        logger.info("from connected user: " + str(data))
-                        inp = str(data)
-                        out = infixToPostfix(inp)
-                        res = postfixEvaluator(out)
-                        logger.info("result sent to user:" + str(res))
+                    pid = os.fork()
+                    if pid ==0 :
+                        logger.info("Connection from: " + str(address))
+                        while True:
+                            data = conn.recv(1024).decode()
+                            if str(data) == "bye" or str(data)=="":
+                                current=0
+                                
+                                break
+                            logger.info("from connected user: " + str(data))
+                            inp = str(data)
+                            out = infixToPostfix(inp)
+                            res = postfixEvaluator(out)
+                            logger.info("result sent to user:" + str(res))
 
-                        data = (str(res)).encode()
-                        conn.send(data)
+                            data = (str(res)).encode()
+                            conn.send(data)
                 else:
-                    # connE, addressE = server_socket.accept()
-                    # with connE:
+                # connE, addressE = server_socket.accept()
+                # with connE:
                     message = "Server is busy."
                     conn.send(message.encode())
                     conn.close()
                     break
-                
+            
             
     
 

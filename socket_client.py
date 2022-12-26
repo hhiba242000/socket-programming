@@ -7,6 +7,7 @@ import logging
 # host = socket.gethostname()
 # port = 5002
 if len(sys.argv)==3:
+    
     host = str(sys.argv[1])
     port = int(sys.argv[2])
 
@@ -25,6 +26,8 @@ infinite_loop = True
 
 def sig_exit(signal,frame):
     logger.info('\nYou pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!')
+    message = ""
+    client_socket.send(message.encode())
     sys.exit(0)
     #client_socket.close()
 
@@ -40,6 +43,7 @@ def client_program():
 
     while infinite_loop == True:
         message = input(" -> ")
+        
         client_socket.send(message.encode()) # send message
         # signal.alarm(2)
         data = client_socket.recv(1024).decode()
@@ -52,6 +56,11 @@ def client_program():
             
             logger.info("Server is dead")
             break
+        if data == "Server is busy.":
+            logger.info("ERROR: Server is busy.")
+            print("ERROR: Server is busy.")
+            break
+            
         print('Received from server: ' + data)
         logger.info('Received from server: ' + data)  # show in terminal
 
