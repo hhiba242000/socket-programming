@@ -3,7 +3,7 @@ import os
 import signal
 import sys
 import math
-
+import json
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -81,9 +81,10 @@ def signal_handler(signal, frame):
 def server_program():
     signal.signal(signal.SIGINT, signal_handler)
     host = socket.gethostname ()
-    port = 5004
+    port = 5003
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_socket.bind ( (host, port) )
     while True:
         server_socket.listen()
@@ -95,29 +96,38 @@ def server_program():
                     print("Connection from: " + str(address))
                     while True:
                         data = conn.recv(1024).decode()
-                        if str(data) == "bye":
-                            data = "bye"
-                            conn.send(data.encode())
-                            break
-                        inp = str(data)
-                        if inp.__contains__ ( "sin" ):
-                            inp = inp.replace ( "sin(", str ( math.sin ( float ( inp[4:inp.index(")")] ) ) ) )
-                            tmp = inp[:inp.index(".")+1]
-                            inp = inp[inp.index("."):].replace(".", "")
-                            inp = inp.replace ( ")", "" )
-                            inp = tmp + inp
-                            
-                        elif inp.__contains__ ( "exp" ):
-                            inp = inp.replace ( "exp(", str ( math.exp ( float ( inp[4:inp.index(")")] ) ) ) )
-                            tmp = inp[:inp.index(".")+1]
-                            inp = inp[inp.index("."):].replace(".", "")
-                            inp = inp.replace ( ")", "" )
-                            inp = tmp + inp
-                        
-                        out = infixToPostfix(inp)
-                        res = postfixEvaluator(out)
-                        print("result sent to user:" + str(res))
-                        data = (str(res)).encode()
+                        dict_of_eq = json.loads(str(data))
+                        list_of_eq = dict_of_eq['equations']
+                        results = {}
+                        results['result'] = []
+                        res=[]
+                        for s in list_of_eq:
+                            inp = str(s)
+                            if inp.__contains__ ( "sin" ):
+                                inp = inp.replace ( "sin(", str ( math.sin ( float ( inp[4:inp.index(")")] ) ) ) )
+                                tmp = inp[:inp.index(".")+1]
+                                inp = inp[inp.index("."):].replace(".", "")
+                                inp = inp.replace ( ")", "" )
+                                inp = tmp + inp
+
+                            elif inp.__contains__ ( "exp" ):
+                                inp = inp.replace ( "exp(", str ( math.exp ( float ( inp[4:inp.index(")")] ) ) ) )
+                                tmp = inp[:inp.index(".")+1]
+                                inp = inp[inp.index("."):].replace(".", "")
+                                inp = inp.replace ( ")", "" )
+                                inp = tmp + inp
+
+                            out = infixToPostfix(inp)
+                            num = postfixEvaluator(out)
+                            if type(num) == float:
+                                res.append(str(num))
+                            else:
+                                res.append('error')
+
+                        results['result'].append(res)
+                        print("dictionary")
+                        print(list_of_eq)
+                        data = (str(results)).encode()
                         conn.send(data)
 
         
