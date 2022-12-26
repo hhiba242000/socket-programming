@@ -3,6 +3,7 @@ import os
 import signal
 import sys
 import logging
+import math
 
 logging.basicConfig(filename="./serverfile.log",
                     format='%(asctime)s %(message)s',
@@ -24,7 +25,7 @@ Priority = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}  # dictionary having priorit
 
 
 def infixToPostfix(expression):
-    stack = [ ]  # initialization of empty stack
+    stack = []  # initialization of empty stack
 
     output = ''
 
@@ -36,46 +37,54 @@ def infixToPostfix(expression):
             output += character
 
         elif character == '(':  # else Operators push onto stack
-
-            stack.append ( '(' )
+            output+=' '
+            stack.append('(')
 
         elif character == ')':
+            output+=' '
+            while stack and stack[-1] != '(':
+                output += stack.pop()
 
-            while stack and stack [ -1 ] != '(':
-                output += stack.pop ()
-
-            stack.pop ()
+            stack.pop()
 
         else:
+            output+=' '
+            while stack and stack[-1] != '(' and Priority[character] <= Priority[stack[-1]]:
+                output += stack.pop()
 
-            while stack and stack [ -1 ] != '(' and Priority [ character ] <= Priority [ stack [ -1 ] ]:
-                output += stack.pop ()
-
-            stack.append ( character )
-
+            stack.append(character)
+    output+=' '
     while stack:
-        output += stack.pop ()
+        output += stack.pop()
 
     return output
 
-
 def postfixEvaluator(expression):
-    stack = [ ]  # initialization of empty stack
+    stack = [] # initialization of empty stack
+    numberTemp1=''
     for character in expression:
-        if character not in Operators:
-            stack.append ( character )
+        if character not in Operators and character != ' ':
+            numberTemp1+=character
+            continue
+        elif character==' ':
+            stack.append(float(numberTemp1))
+            numberTemp1=''
+            continue
         else:
-            temp1 = stack.pop ()
-            temp2 = stack.pop ()
+            temp1 = stack.pop()
+            temp2 = stack.pop()
             if character == '+':
-                stack.append ( int ( temp2 ) + int ( temp1 ) )
+                stack.append(float(temp2)+float(temp1))
             elif character == '-':
-                stack.append ( int ( temp2 ) - int ( temp1 ) )
+                stack.append(float(temp2)-float(temp1))
             elif character == '*':
-                stack.append ( int ( temp2 ) * int ( temp1 ) )
+                stack.append(float(temp2)*float(temp1))
             elif character == '/':
-                stack.append ( int ( temp2 ) / int ( temp1 ) )
-    return stack.pop ()
+                stack.append(float(temp2)/float(temp1))
+            elif character == '^':
+                stack.append(math.pow(float(temp2),float(temp1)))
+    return stack.pop()
+
 if len(sys.argv)==3:
     host = str(sys.argv[1])
     port = int(sys.argv[2])
@@ -89,6 +98,27 @@ def signal_handler(signal, frame):
     server_socket.close()
     sys.exit(0)
 
+def calculateData(inp):
+    if inp.__contains__ ( "sin" ):
+            inp = inp.replace ( "sin(", str ( math.sin ( float ( inp[4:inp.index(")")] ) ) ) )
+            tmp = inp[:inp.index(".")+1]
+            inp = inp[inp.index("."):].replace(".", "")
+            inp = inp.replace ( ")", "" )
+            inp = tmp + inp
+            
+    elif inp.__contains__ ( "exp" ):
+        inp = inp.replace ( "exp(", str ( math.exp ( float ( inp[4:inp.index(")")] ) ) ) )
+        tmp = inp[:inp.index(".")+1]
+        inp = inp[inp.index("."):].replace(".", "")
+        inp = inp.replace ( ")", "" )
+        inp = tmp + inp
+    print(inp)
+    out=infixToPostfix(inp)
+    print(out)
+    print(postfixEvaluator(out))
+    return str(out)
+    
+
 def server_program():
     global current
     current=0
@@ -98,8 +128,6 @@ def server_program():
         server_socket.listen ()
         while True:
             conn, address = server_socket.accept()
-            
-            
             with conn:
                 if (current==0):
                     current=1
@@ -117,9 +145,7 @@ def server_program():
                                 
                                 break
                             logger.info("from connected user: " + str(data))
-                            inp = str(data)
-                            out = infixToPostfix(inp)
-                            res = postfixEvaluator(out)
+                            res=calculateData(str(data))
                             logger.info("result sent to user:" + str(res))
 
                             data = (str(res)).encode()

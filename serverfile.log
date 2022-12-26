@@ -831,3 +831,38 @@ You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
 2022-12-26 23:20:12,951 result sent to user:4
 2022-12-26 23:20:32,765 
 You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-27 00:40:26,316 Connection from: ('127.0.0.1', 37542)
+2022-12-27 00:40:28,540 from connected user: 5
+2022-12-27 00:40:28,540 result sent to user:5
+2022-12-27 00:40:31,527 from connected user: sin(1)
+2022-12-27 00:40:31,527 result sent to user:1
+2022-12-27 00:40:38,647 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-27 00:40:46,177 Connection from: ('127.0.0.1', 42394)
+2022-12-27 00:40:47,789 from connected user: 5
+2022-12-27 00:40:47,790 result sent to user:5.0
+2022-12-27 00:40:53,461 from connected user: sin(1)
+2022-12-27 00:43:41,569 Connection from: ('127.0.0.1', 40820)
+2022-12-27 00:43:43,782 from connected user: sin(1)
+2022-12-27 00:43:43,782 result sent to user:None
+2022-12-27 00:44:29,620 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
+2022-12-27 00:44:32,507 Connection from: ('127.0.0.1', 51566)
+2022-12-27 00:44:33,220 from connected user: 5
+2022-12-27 00:44:33,221 result sent to user:5 
+2022-12-27 00:44:37,470 from connected user: sin(10)
+2022-12-27 00:45:51,334 Connection from: ('127.0.0.1', 57012)
+2022-12-27 00:45:52,303 from connected user: 5
+2022-12-27 00:45:52,304 result sent to user:5 
+2022-12-27 00:45:54,678 from connected user: sin(1)
+2022-12-27 00:45:54,678 result sent to user:0.84147098480789651 
+2022-12-27 00:46:01,074 from connected user: exp(1)
+2022-12-27 00:46:01,075 result sent to user:2.7182818284590451 
+2022-12-27 00:46:05,823 from connected user: exp(0)
+2022-12-27 00:46:05,823 result sent to user:1.00 
+2022-12-27 00:48:21,762 from connected user: exp(5)*2
+2022-12-27 00:48:21,762 result sent to user:148.41315910257665 2 *
+2022-12-27 00:48:31,060 from connected user: exp(10)-5000
+2022-12-27 00:48:31,060 result sent to user:22026.46579480671810 5000 -
+2022-12-27 00:48:40,421 
+You pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!
