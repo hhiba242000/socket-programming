@@ -3,8 +3,9 @@ import os
 import signal
 import sys
 import math
+import logging
 
-
+global logger
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print ( f'Hi, {name}' )  # Press Ctrl+F8 to toggle the breakpoint.
@@ -74,14 +75,39 @@ def postfixEvaluator(expression):
             return stack.pop()
 
 def signal_handler(signal, frame):
-    print('\nYou pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!')
+    logger.info('\nYou pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!')
     sys.exit(0)
+def calculate_result(data):
+    inp = str(data)
+    if inp.__contains__("sin"):
+         inp = inp.replace("sin(", str(math.sin(float(inp[4:inp.index(")")]))))
+         tmp = inp[:inp.index(".") + 1]
+         inp = inp[inp.index("."):].replace(".", "")
+         inp = inp.replace(")", "")
+         inp = tmp + inp
 
+    elif inp.__contains__("exp"):
+         inp = inp.replace("exp(", str(math.exp(float(inp[4:inp.index(")")]))))
+         tmp = inp[:inp.index(".") + 1]
+         inp = inp[inp.index("."):].replace(".", "")
+         inp = inp.replace(")", "")
+         inp = tmp + inp
+
+    out = infixToPostfix(inp)
+    res = postfixEvaluator(out)
+    return res
 
 def server_program():
     signal.signal(signal.SIGINT, signal_handler)
-    host = socket.gethostname ()
-    port = 5004
+    logging.basicConfig(filename="./serverfile.log",
+                        format='%(asctime)s %(message)s',
+                        filemode='w', force=True)
+    global logger
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+
+    host = '127.0.0.1'
+    port = 5005
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind ( (host, port) )
@@ -92,31 +118,24 @@ def server_program():
             with conn:
                 pid = os.fork()
                 if pid == 0:
-                    print("Connection from: " + str(address))
+                    logger.info("Connection from: " + str(address))
                     while True:
                         data = conn.recv(1024).decode()
+                        logger.info("data decoded: "+str(data))
                         if str(data) == "bye":
                             data = "bye"
+                            logger.info("Client is wants to leave")
                             conn.send(data.encode())
                             break
-                        inp = str(data)
-                        if inp.__contains__ ( "sin" ):
-                            inp = inp.replace ( "sin(", str ( math.sin ( float ( inp[4:inp.index(")")] ) ) ) )
-                            tmp = inp[:inp.index(".")+1]
-                            inp = inp[inp.index("."):].replace(".", "")
-                            inp = inp.replace ( ")", "" )
-                            inp = tmp + inp
-                            
-                        elif inp.__contains__ ( "exp" ):
-                            inp = inp.replace ( "exp(", str ( math.exp ( float ( inp[4:inp.index(")")] ) ) ) )
-                            tmp = inp[:inp.index(".")+1]
-                            inp = inp[inp.index("."):].replace(".", "")
-                            inp = inp.replace ( ")", "" )
-                            inp = tmp + inp
-                        
-                        out = infixToPostfix(inp)
-                        res = postfixEvaluator(out)
-                        print("result sent to user:" + str(res))
+
+                        if not data:
+                            data = "nothing"
+                            logger.info("Client exited by keyboard interrupt")
+                            break
+                        res = calculate_result(data)
+                        if not res:
+                            res = NaN
+                        logger.info("result sent to user:" + str(res))
                         data = (str(res)).encode()
                         conn.send(data)
 
