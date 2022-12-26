@@ -71,27 +71,31 @@ def postfixEvaluator(expression):
             elif character == '*':
                 stack.append(float(temp2)*float(temp1))
             elif character == '/':
-                stack.append(float(temp2) / float(temp1))
-            return stack.pop()
+                stack.append(float(temp2)/float(temp1))
+            elif character == '^':
+                stack.append(math.pow(float(temp2),float(temp1)))
+    return stack.pop()
+
 
 def signal_handler(signal, frame):
     logger.info('\nYou pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!')
     sys.exit(0)
 def calculate_result(data):
     inp = str(data)
-    if inp.__contains__("sin"):
-         inp = inp.replace("sin(", str(math.sin(float(inp[4:inp.index(")")]))))
-         tmp = inp[:inp.index(".") + 1]
-         inp = inp[inp.index("."):].replace(".", "")
-         inp = inp.replace(")", "")
-         inp = tmp + inp
-
-    elif inp.__contains__("exp"):
-         inp = inp.replace("exp(", str(math.exp(float(inp[4:inp.index(")")]))))
-         tmp = inp[:inp.index(".") + 1]
-         inp = inp[inp.index("."):].replace(".", "")
-         inp = inp.replace(")", "")
-         inp = tmp + inp
+    if inp.__contains__ ( "sin" ):
+        inp = inp.replace ( "sin(", str ( math.sin ( float ( inp[4:inp.index(")")] ) ) ) )
+        tmp = inp[:inp.index(".")+1]
+        inp = inp[inp.index("."):].replace(".", "")
+        inp = inp.replace ( ")", "" )
+        inp = tmp + inp
+            
+    elif inp.__contains__ ( "exp" ):
+        inp = inp.replace ( "exp(", str ( math.exp ( float ( inp[4:inp.index(")")] ) ) ) )
+        tmp = inp[:inp.index(".")+1]
+        inp = inp[inp.index("."):].replace(".", "")
+        inp = inp.replace ( ")", "" )
+        inp = tmp + inp
+    print(inp)
 
     out = infixToPostfix(inp)
     res = postfixEvaluator(out)
@@ -142,7 +146,7 @@ def server_program():
                             break
                         res = calculate_result(data)
                         if not res:
-                            res = NaN
+                            res = "NaN"
                         logger.info("result sent to user:" + str(res))
                         data = (str(res)).encode()
                         conn.send(data)
