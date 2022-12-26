@@ -4,6 +4,14 @@ import signal
 import sys
 import logging
 
+# host = socket.gethostname()
+# port = 5002
+if len(sys.argv)==3:
+    host = str(sys.argv[1])
+    port = int(sys.argv[2])
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
 logging.basicConfig(filename="./clientfile.log",
                     format='%(asctime)s %(message)s',
                     filemode='a', force=True)
@@ -21,30 +29,27 @@ def sig_exit(signal,frame):
     #client_socket.close()
 
 def sig_alarm(signal,frame):
-    logger.info("\nClient is busy at the moment, get back to it in another request")
+    logger.info("\nServer is busy at the moment, get back to it in another request")
     #client_socket.close()
     sys.exit(0)
 
 def client_program():
     signal.signal(signal.SIGINT, sig_exit)
     signal.signal(signal.SIGALRM,sig_alarm)
-    host = socket.gethostname()
-    port = 5002
-
-    client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client_socket.connect((host, port))
 
     while infinite_loop == True:
         message = input(" -> ")
         client_socket.send(message.encode()) # send message
-        signal.alarm(5)
+        # signal.alarm(2)
         data = client_socket.recv(1024).decode()
-        signal.alarm(0)
+        # signal.alarm(0)
         if data == "bye":
             logger.info("Client is notified you left")
             break
 
         if not data:
+            
             logger.info("Server is dead")
             break
         print('Received from server: ' + data)

@@ -76,36 +76,53 @@ def postfixEvaluator(expression):
             elif character == '/':
                 stack.append ( int ( temp2 ) / int ( temp1 ) )
     return stack.pop ()
+if len(sys.argv)==3:
+    host = str(sys.argv[1])
+    port = int(sys.argv[2])
 
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind ( (host, port) )
 
 def signal_handler(signal, frame):
     logger.info('\nYou pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!')
+    server_socket.close()
     sys.exit(0)
 
 def server_program():
-    signal.signal(signal.SIGINT, signal_handler)
-    host = socket.gethostname ()
-    port = 5002
-
-    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server_socket.bind ( (host, port) )
-    server_socket.listen (0)
+    current=0
+    signal.signal(signal.SIGINT, signal_handler)  
     while True:
-        conn, address = server_socket.accept()
-        with conn:
-            logger.info("Connection from: " + str(address))
-            while True:
-                data = conn.recv(1024).decode()
-                if str(data) == "bye":
-                    break
-                logger.info("from connected user: " + str(data))
-                inp = str(data)
-                out = infixToPostfix(inp)
-                res = postfixEvaluator(out)
-                logger.info("result sent to user:" + str(res))
+        server_socket.listen ()
+        while True:
+            conn, address = server_socket.accept()
+            with conn:
+                if (current==0):
+                    current=1
+                    logger.info("Connection from: " + str(address))
+                    while True:
+                        data = conn.recv(1024).decode()
+                        if str(data) == "bye" or str(data)=="":
+                            current=0
+                            break
+                        logger.info("from connected user: " + str(data))
+                        inp = str(data)
+                        out = infixToPostfix(inp)
+                        res = postfixEvaluator(out)
+                        logger.info("result sent to user:" + str(res))
 
-                data = (str(res)).encode()
-                conn.send(data)
+                        data = (str(res)).encode()
+                        conn.send(data)
+                else:
+                    # connE, addressE = server_socket.accept()
+                    # with connE:
+                    message = "Server is busy."
+                    conn.send(message.encode())
+                    conn.close()
+                    break
+                
+            
+    
 
 
 if __name__ == '__main__':
