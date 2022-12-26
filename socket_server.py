@@ -102,13 +102,13 @@ def calculate_equation(s):
     return num
 
 def server_program():
+    signal.signal(signal.SIGINT, signal_handler)
     host = "127.0.0.1"  # Standard loopback interface address (localhost)
     port = 8027
     if len(sys.argv) == 3:
         host = str(sys.argv[1])
         port = int(sys.argv[2])
 
-    signal.signal(signal.SIGINT, signal_handler)
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server_socket.bind ( (host, port) )

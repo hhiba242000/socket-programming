@@ -21,6 +21,12 @@ def extract_data(data):
     return msg
 
 def client_program():
+        host = "127.0.0.1"  # Standard loopback interface address (localhost)
+        port = 8027
+        if len(sys.argv) == 3:
+            host = str(sys.argv[1])
+            port = int(sys.argv[2])
+
         client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)  # SOCK_STREAM for TCP sockets and SOCK_DGRAM for UDP sockets
         client_socket.connect((host, port))
 
