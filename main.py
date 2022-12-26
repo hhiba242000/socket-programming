@@ -71,6 +71,8 @@ def postfixEvaluator(expression):
                 stack.append(float(temp2)*float(temp1))
             elif character == '/':
                 stack.append(float(temp2)/float(temp1))
+            elif character == '^':
+                stack.append(math.pow(float(temp2),float(temp1)))
     return stack.pop()
 
 

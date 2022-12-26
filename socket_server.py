@@ -9,7 +9,7 @@ def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print ( f'Hi, {name}' )  # Press Ctrl+F8 to toggle the breakpoint.
 
-Operators = set ( [ '+', '-', '*', '/', '(', ')', '^' ] )  # collection of Operators
+Operators = set(['+', '-', '*', '/', '(', ')', '^'])  # collection of Operators
 
 Priority = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}  # dictionary having priorities of Operators
 
@@ -70,8 +70,10 @@ def postfixEvaluator(expression):
             elif character == '*':
                 stack.append(float(temp2)*float(temp1))
             elif character == '/':
-                stack.append(float(temp2) / float(temp1))
-            return stack.pop()
+                stack.append(float(temp2)/float(temp1))
+            elif character == '^':
+                stack.append(math.pow(float(temp2),float(temp1)))
+    return stack.pop()
 
 def signal_handler(signal, frame):
     print('\nYou pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!')
