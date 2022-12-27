@@ -4,6 +4,8 @@ import signal
 import sys
 import math
 import json
+import sys
+import random
 
 from typing import List
 
@@ -17,15 +19,21 @@ Operators = set ( [ '+', '-', '*', '/', '(', ')', '^' ] )  # collection of Opera
 
 Priority = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}  # dictionary having priorities of Operators
 
+Digits = set (['.', '0','1','2','3','4','5','6','7','8','9' ])
 
 def infixToPostfix(expression):
     stack = []  # initialization of empty stack
 
     output = ''
-
+    if expression[0] not in Digits and expression[0] !=' ' and expression[0]!='(':
+        return "Error" 
     for character in expression:
         if character == ' ':
             continue
+        if character not in Operators and character not in Digits:
+            return "Error"
+            
+
         if character not in Operators:  # if an operand append in postfix expression
 
             output += character
@@ -54,6 +62,8 @@ def infixToPostfix(expression):
     return output
 
 def postfixEvaluator(expression):
+    if expression == "Error":
+        return "Error"
     stack = [] # initialization of empty stack
     numberTemp1=''
     for character in expression:
@@ -61,12 +71,18 @@ def postfixEvaluator(expression):
             numberTemp1+=character
             continue
         elif character==' ':
+            if str(numberTemp1).isnumeric==False or numberTemp1=='':
+                return "Error"
             stack.append(float(numberTemp1))
             numberTemp1=''
             continue
         else:
             temp1 = stack.pop()
             temp2 = stack.pop()
+            if str(temp1).isnumeric==False:
+                return "Error"
+            if str(temp2).isnumeric==False:
+                return "Error"
             if character == '+':
                 stack.append(float(temp2)+float(temp1))
             elif character == '-':
@@ -74,8 +90,10 @@ def postfixEvaluator(expression):
             elif character == '*':
                 stack.append(float(temp2)*float(temp1))
             elif character == '/':
-                stack.append(float(temp2) / float(temp1))
-            return stack.pop()
+                stack.append(float(temp2)/float(temp1))
+            elif character == '^':
+                stack.append(math.pow(float(temp2),float(temp1)))
+    return stack.pop()
 
 def signal_handler(signal, frame):
     print('\nYou pressed Ctrl+C, keyboardInterrupt detected,Server is exiting!')
@@ -83,19 +101,20 @@ def signal_handler(signal, frame):
 
 def calculate_equation(s):
     inp = str(s)
-    if inp.__contains__("sin"):
-        inp = inp.replace("sin(", str(math.sin(float(inp[4:inp.index(")")]))))
-        tmp = inp[:inp.index(".") + 1]
+    if inp.__contains__ ( "sin" ):
+        inp = inp.replace ( "sin(", str ( math.sin ( float ( inp[4:inp.index(")")] ) ) ) )
+        tmp = inp[:inp.index(".")+1]
         inp = inp[inp.index("."):].replace(".", "")
-        inp = inp.replace(")", "")
+        inp = inp.replace ( ")", "" )
         inp = tmp + inp
-
-    elif inp.__contains__("exp"):
-        inp = inp.replace("exp(", str(math.exp(float(inp[4:inp.index(")")]))))
-        tmp = inp[:inp.index(".") + 1]
+            
+    elif inp.__contains__ ( "exp" ):
+        inp = inp.replace ( "exp(", str ( math.exp ( float ( inp[4:inp.index(")")] ) ) ) )
+        tmp = inp[:inp.index(".")+1]
         inp = inp[inp.index("."):].replace(".", "")
-        inp = inp.replace(")", "")
+        inp = inp.replace ( ")", "" )
         inp = tmp + inp
+    
 
     out = infixToPostfix(inp)
     num = postfixEvaluator(out)
@@ -118,26 +137,26 @@ def server_program():
             conn, address = server_socket.accept()
             with conn:
                 print("Connection from: " + str(address))
-                print("before receive\n")
+                # print("before receive\n")
                 while True:
                     data = conn.recv(1024).decode()
-                    print('dataaaa'+str(data))
+                    # print('dataaaa'+str(data))
                     if not data:
                         data = f'HTTP/1.0 500 \r\n'
-                        print(data)
+                        # print(data)
                         data = (str(data)).encode()
                         conn.send(data)
                         break
-                    print("after receive "+str(data)+"\n")
+                    # print("after receive "+str(data)+"\n")
                     split_post = data.split("\r\n")
-                    print(split_post)
+                    # print(split_post)
                     msg = split_post[4]
-                    print("message "+str(msg)+"\n")
+                    # print("message "+str(msg)+"\n")
                     dict_of_eq = json.loads(str(msg))
                     list_of_eq = dict_of_eq['equations']
-                    print(list_of_eq)
+                    # print(list_of_eq)
                     results = {}
-                    results['qid'] = 1234
+                    results['qid'] = random.randint(1000,9999)
                     results['query'] = []
                     res=[]
                     i=1
@@ -157,10 +176,10 @@ def server_program():
                         res.append(temp)
                         i=i+1
                     results['query'] = res
-                    print("OUT OF FOR LOOP\n")
-                    print(list_of_eq)
+                    # print("OUT OF FOR LOOP\n")
+                    # print(list_of_eq)
                     data = f'HTTP/1.0 200 OK\r\n{results}\r\n'
-                    print(data)
+                    # print(data)
                     data = (str(data)).encode()
                     conn.send(data)
 

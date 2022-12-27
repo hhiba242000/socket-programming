@@ -2,6 +2,7 @@ import socket
 import json
 import os
 import socket
+import sys
 from typing import List
 
 host = "127.0.0.1"
@@ -9,15 +10,15 @@ port = 8027  # take it as argument from command line
 
 def prepare_packet(port, host, data):
     i = len(data)
-    print(data + " &&&&&&&" + str(i))
+    # print(data + " &&&&&&&" + str(i))
     return f"POST /session HTTP/1.1\r\nHost: {host}:{port}\r\nContent-Type: application/json\r\nContent-Length: {i}\r\n{data}\r\n"
 
 
 def extract_data(data):
     split_post = data.split("\r\n")
-    print(split_post)
+    # print(split_post)
     msg = split_post[1]
-    print("msg " + str(msg)+" in function\n")
+    # print("msg " + str(msg)+" in function\n")
     return msg
 
 def client_program():
@@ -45,14 +46,14 @@ def client_program():
             jsonResult = prepare_packet(port, host,jsonResult)
 
             client_socket.send(bytes(jsonResult.encode()))
-            print("waiting to receive in client\n")
+            # print("waiting to receive in client\n")
             data = client_socket.recv(1024).decode()
-            print("after receive in client\n")
-            print(data)
+            # print("after receive in client\n")
+            # print(data)
             if not data:
                 break
             data = extract_data(data)
-            print("after extraction")
+            # print("after extraction")
             if data == "bye":
                 print("Client is notified you left")
                 break
