@@ -1,12 +1,4 @@
-2022-12-27 01:04:28,986 message sent to server 5
-2022-12-27 01:04:28,987 Received from server: 5.0
-2022-12-27 01:04:31,255 message sent to server 5+5
-2022-12-27 01:04:31,255 Received from server: 10.0
-2022-12-27 01:04:38,770 message sent to server sin(1.57)*2
-2022-12-27 01:04:38,771 Received from server: 1.9999993658636692
-2022-12-27 01:04:44,484 message sent to server 5+5+5
-2022-12-27 01:04:44,485 Received from server: 15.0
-2022-12-27 01:04:52,035 message sent to server 5+5*22-10
-2022-12-27 01:04:52,036 Received from server: 105.0
-2022-12-27 01:05:14,155 
-You pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!
+2022-12-27 02:58:08,311 message sent to server 34
+2022-12-27 02:58:08,312 Received from server: 34.0
+2022-12-27 02:58:15,027 message sent to server [A33
+2022-12-27 02:58:15,027 Server is dead

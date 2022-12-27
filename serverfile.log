@@ -1,17 +1,7 @@
-2022-12-27 01:04:27,771 Connection from: ('127.0.0.1', 47858)
-2022-12-27 01:04:28,987 data decoded: 5
-2022-12-27 01:04:28,987 result sent to user:5.0
-2022-12-27 01:04:31,255 data decoded: 5+5
-2022-12-27 01:04:31,255 result sent to user:10.0
-2022-12-27 01:04:38,770 data decoded: sin(1.57)*2
-2022-12-27 01:04:38,771 result sent to user:1.9999993658636692
-2022-12-27 01:04:44,484 data decoded: 5+5+5
-2022-12-27 01:04:44,485 result sent to user:15.0
-2022-12-27 01:04:52,035 data decoded: 5+5*22-10
-2022-12-27 01:04:52,036 result sent to user:105.0
-2022-12-27 01:05:14,156 data decoded: 
-2022-12-27 01:05:14,156 Client exited by keyboard interrupt
-2022-12-27 01:05:15,601 
+2022-12-27 02:58:07,204 Connection from: ('127.0.0.1', 43248)
+2022-12-27 02:58:08,312 data decoded: 34
+2022-12-27 02:58:08,312 result sent to user:34.0
+2022-12-27 02:58:11,023 
 You pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!
-2022-12-27 01:05:15,611 
+2022-12-27 02:58:11,024 
 You pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!

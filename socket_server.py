@@ -79,6 +79,7 @@ def postfixEvaluator(expression):
 
 def signal_handler(signal, frame):
     logger.info('\nYou pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!')
+    print('\nYou pressed Ctrl+C, keyboardInterrupt detected,Client is exiting!')
     sys.exit(0)
 def calculate_result(data):
     inp = str(data)
@@ -111,16 +112,16 @@ def server_program():
     logger.setLevel(logging.DEBUG)
 
     if len(sys.argv) == 3:
-        for i in sys.argv:
-            print(str(i))
+        # for i in sys.argv:
+        #     print(str(i))
         host = str(sys.argv[1])
         port = int(sys.argv[2])
     else:
         host = '127.0.0.1'
         port = 5005
 
-    print(host)
-    print(port)
+    # print(host)
+    # print(port)
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.bind ( (host, port) )
     while True:
@@ -131,23 +132,28 @@ def server_program():
                 pid = os.fork()
                 if pid == 0:
                     logger.info("Connection from: " + str(address))
+                    print("Connection from: " + str(address))
                     while True:
                         data = conn.recv(1024).decode()
                         logger.info("data decoded: "+str(data))
+                        print("data decoded: "+str(data))
                         if str(data) == "bye":
                             data = "bye"
                             logger.info("Client is wants to leave")
+                            print("Client is wants to leave")
                             conn.send(data.encode())
                             break
 
                         if not data:
                             data = "nothing"
                             logger.info("Client exited by keyboard interrupt")
+                            print("Client exited by keyboard interrupt")
                             break
                         res = calculate_result(data)
                         if not res:
                             res = "NaN"
                         logger.info("result sent to user:" + str(res))
+                        print("result sent to user " + str(address[1]) +" :" + str(res))
                         data = (str(res)).encode()
                         conn.send(data)
 
